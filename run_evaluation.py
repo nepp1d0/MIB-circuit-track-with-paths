@@ -79,12 +79,15 @@ if __name__ == "__main__":
             
             if model_name == "interpbench":
                 d = evaluate_area_under_roc(reference_graph, graph)
+                print(f"Entered interpbench")
             else:
+                print(f"Entered interpbench false")
                 eval_auc_outputs = evaluate_area_under_curve(
                     model, graph, dataloader, attribution_metric, level=args.level,
                     absolute=args.absolute,
                     apply_greedy=apply_greedy,
                 )
+                print(f"eval_auc_outputs: {eval_auc_outputs}")
                 weighted_edge_counts, area_under, area_from_1, average, faithfulnesses = eval_auc_outputs
                 d = {
                     "weighted_edge_counts": weighted_edge_counts,
@@ -93,6 +96,7 @@ if __name__ == "__main__":
                     "average": average,
                     "faithfulnesses": faithfulnesses
                 }
+            print(d)
 
             method_name_saveable = f"{args.method}_{args.ablation}_{args.level}"
             output_path = os.path.join(args.output_dir, method_name_saveable)
